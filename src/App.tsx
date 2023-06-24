@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Bubble from './components/Bubble'
@@ -6,6 +6,7 @@ import Bubble from './components/Bubble'
 function App() {
   const [input, setInput] = useState("");
   const [bubbles, setBubbles] = useState<string[]>([]);
+  const [seconds, setSeconds] = useState(0);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInput(event.target.value);
@@ -17,6 +18,15 @@ function App() {
       setInput("");
     }
   }
+
+  useEffect(() => {
+    if (bubbles.length > 0) {
+      const timer = setTimeout(() => {
+        setBubbles(preBubbles => preBubbles.slice(1));
+      }, 5000);
+    return () => clearTimeout(timer);
+    }
+  }, [bubbles]);
 
   return (
     <div className="App">
