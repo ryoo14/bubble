@@ -21,7 +21,7 @@ function App() {
     if (bubbles.length > 0) {
       const timer = setTimeout(() => {
         setBubbles(preBubbles => preBubbles.slice(1));
-      }, 5000);
+      }, 10000);
     return () => clearTimeout(timer);
     }
   }, [bubbles]);
